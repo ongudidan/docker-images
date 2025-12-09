@@ -5,7 +5,10 @@ FROM yiisoftware/yii2-php:8.4-apache
 WORKDIR /app
 
 # Copy custom Apache config
-COPY laravel-apache.conf /etc/apache2/sites-available/000-default.conf
+COPY laravel-apache-https.conf /etc/apache2/sites-available/000-default.conf
+
+# Enable required Apache modules
+RUN a2enmod rewrite headers
 
 # Ensure Laravel directories are writable
 RUN mkdir -p /app/storage /app/bootstrap/cache \
